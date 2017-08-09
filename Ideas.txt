@@ -1,1 +1,5 @@
 
+Errors:
+  * String starting with double quotes but not ending or vice-versa.
+  * Wrong spelling
+  * 
