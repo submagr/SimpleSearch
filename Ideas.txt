@@ -16,3 +16,4 @@ Meeting with Gagan:
  2. query validate
  3. horizontal and vertical collation
  4. trie as class
+ 5. take care of scope --  by copy, by ref or by shared ref
