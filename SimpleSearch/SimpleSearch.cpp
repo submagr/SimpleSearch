@@ -9,8 +9,7 @@
 # include "Files.h"
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
 	QueryParser qparser;
 	Query parsedQ = qparser.parse(argc, argv);
 	listFiles files(parsedQ.getScope());

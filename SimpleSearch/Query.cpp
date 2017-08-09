@@ -33,7 +33,7 @@ Query QueryParser::parse(int argc, char *argv[]){
 }
 
 ProcessQuery::ProcessQuery(listFiles files, Query query) :_files(files), _query(query){
-	for (int i = 0; i<files._fileLocs.size(); i++){
+	for (int i = 0; i<(int)(files._fileLocs.size()); i++){
 		ProcessFile(i);
 	}
 	_results.display();
@@ -62,7 +62,7 @@ void ProcessQuery::badCharHeuristic(string str, int size, int badchar[NO_OF_CHAR
 }
 
 // A utility function to get maximum of two integers
-int ProcessQuery::max(int a, int b) { 
+int ProcessQuery::myMax(int a, int b){ 
 	return (a > b) ? a : b; 
 }
 
@@ -96,7 +96,7 @@ Result ProcessQuery::search(string fileName, string pat)
 			result.addMatch(s);
 			s += (s + m < n) ? m - badchar[txt[s + m]] : 1;
 		}else{
-			s += max(1, j - badchar[txt[s + j]]);
+			s += myMax(1, j - badchar[txt[s + j]]);
 		}
 	}
 	infile.close();

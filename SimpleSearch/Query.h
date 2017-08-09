@@ -31,7 +31,7 @@ public:
 	Results _results;
 
 	ProcessQuery(listFiles files, Query query);
-	int max(int a, int b);
+	int myMax(int a, int b);
 	int getFileSize(string fileName);
 	void badCharHeuristic(string str, int size, int badchar[NO_OF_CHARS]);
 	Result search(string fileName, string pat);
