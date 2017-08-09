@@ -1,5 +1,13 @@
 
-Errors:
+Error Checking for:
   * String starting with double quotes but not ending or vice-versa.
   * Wrong spelling
-  * 
+  
+  
+Possible Extensions:
+ * Suggesting correct words when a wrong spelling is encountered.
+ 
+ 
+Suggested reading:
+ * http://www.geeksforgeeks.org/data-structure-dictionary-spell-checker/
+  
