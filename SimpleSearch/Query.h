@@ -6,6 +6,8 @@
 #include "Result.h"
 #include<fstream>
 #include "Files.h"
+#include <list>
+#include <map>
 using namespace std;
 
 # define NO_OF_CHARS 256
@@ -37,5 +39,4 @@ public:
 	Result search(string fileName, string pat);
 	void ProcessFile(int i);
 };
-
 #endif 

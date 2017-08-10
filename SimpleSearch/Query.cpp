@@ -54,7 +54,7 @@ int ProcessQuery::getFileSize(string fileName){
 void ProcessQuery::badCharHeuristic(string str, int size, int badchar[NO_OF_CHARS]){
 	int i;
 
-	for (i = 0; i < NO_OF_CHARS; i++)
+	for (i = 0; i < 256 /*<TODO>*/; i++)
 		badchar[i] = -1;
 
 	for (i = 0; i < size; i++)
@@ -80,7 +80,7 @@ Result ProcessQuery::search(string fileName, string pat)
 	infile >> txt;
 	// std::transform(data.begin(), data.end(), data.begin(), ::tolower);
 
-	int badchar[NO_OF_CHARS];
+	int badchar[256/*<TODO>*/];
 
 	badCharHeuristic(pat, m, badchar);
 

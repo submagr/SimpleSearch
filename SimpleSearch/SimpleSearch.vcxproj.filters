@@ -36,6 +36,12 @@
     <ClInclude Include="Files.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SubQuery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubQueryFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Files.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubQuery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubQueryFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
