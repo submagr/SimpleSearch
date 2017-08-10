@@ -5,6 +5,10 @@ SubQuery::SubQuery(string rawSubQuery, bool isFirst) : _rawSubQuery(rawSubQuery)
 
 }
 
+void SubQuery::displaySubQuery(){
+	cout << "\t" << _rawSubQuery << "\t" << _isFirst << endl;
+}
+
 ExactMatch::ExactMatch(string rawSubQuery, bool isFirst) : SubQuery(rawSubQuery, isFirst)
 {
 	// Preprocess the rawSubQuery
@@ -35,6 +39,7 @@ void ExactMatch::handleQuery(int *fileOccurances, int fileOccurancesSize)
 		fileOccurances[*iterator] *= rawCounts[*iterator];
 	}
 }
+
 
 Stemming::Stemming(string rawSubQuery, bool isFirst) : SubQuery(rawSubQuery, isFirst)
 {

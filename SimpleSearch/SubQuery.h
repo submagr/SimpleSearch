@@ -5,6 +5,7 @@
 #include<string>
 #include<list>
 #include<map>
+#include<iostream>
 using namespace std;
 
 class SubQuery{
@@ -21,6 +22,7 @@ public:
 		- Update the fileOccurances array
 	*/
 	virtual void handleQuery(int *fileOccurances, int fileOccurancesSize) = 0;
+	void displaySubQuery();
 };
 
 class ExactMatch : public SubQuery{

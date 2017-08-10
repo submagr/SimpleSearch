@@ -13,22 +13,72 @@ string Query::getKeyword(){
 	return _keyword;
 }
 
-Query QueryParser::parse(int argc, char *argv[]){
-	if (argc != 3) {
-		cout << "Usage: " << argv[0] << " <scope>" << " search keyword" << endl;
-		throw;
-	} else {
-		Query q;
-		q.setParams(argv[1], argv[2]);
-		return q;
-		//ifstream the_file(argv[1]);
-		//if (!the_file.is_open())
-		//	cout << "Could not open file\n";
-		//else {
-		//	char x;
-		//	while (the_file.get(x))
-		//		cout << x;
-		//}
+
+void Query::displayParsedQuery(){
+	typedef map<int, list<SubQuery *>>::const_iterator MapIterator;
+	for (MapIterator iter = root.begin(); iter != root.end(); iter++)
+	{
+		cout << "Key: " << iter->first << endl << "Values:" << endl;
+		list<SubQuery *> columnList = (iter->second);
+		for (list<SubQuery *>::iterator i = columnList.begin(); i != columnList.end(); ++i)
+			(*i)->displaySubQuery();
+	}
+}
+
+Query QueryParser::parse(string scope, string query){
+	Query q;
+	q.setParams(scope, query);
+	CheckPhrase(q);
+	return q;
+}
+
+void QueryParser::CheckPhrase(Query &q)
+{
+	string input = q.getKeyword();
+	CreateTree(q);
+}
+
+vector<string> QueryParser::split(string sentence){
+	istringstream iss(sentence);
+	vector<string> arr;
+	copy(istream_iterator<string>(iss),
+		istream_iterator<string>(),
+		back_inserter(arr));
+	return arr;
+}
+
+
+void QueryParser::CreateTree(Query &q)
+{
+	string input = q.getKeyword();
+	vector<string> arr;
+	arr = split(input); 
+	// <XXX: There is an issue with the algorithm of split (Hint: What happens when subquery of type exact match contains spaces ?)>
+	bool start = true; // Represents that map[child] is not created yet
+	int child = 0; // Denotes the OR branch (column)
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		if (arr[i].compare("AND") == 0)
+		{
+			continue;
+		}
+		else if (arr[i].compare("OR") == 0) // <XXX: what happens if first word was OR>
+		{
+			start = true;
+			child++;
+			continue;
+		}
+		else if (start)
+		{
+			SubQuery * first = subQueryFactory.CreateSubQuery(arr[i], start);
+			q.root[child].push_back(first);
+			start = false;
+		}
+		else
+		{
+			SubQuery *temp = subQueryFactory.CreateSubQuery(arr[i], start);
+			q.root[child].push_back(temp);
+		}
 	}
 }
 
@@ -108,3 +158,4 @@ void ProcessQuery::ProcessFile(int i){
 	Result result = search(fileLoc, _query.getKeyword());
 	_results.addResult(result);
 }
+
