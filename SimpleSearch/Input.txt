@@ -1,0 +1,3 @@
+Test/test.txt
+apple AND ooty OR boss
+apple AND ooty OR boss OR apply AND ooty AND cool 

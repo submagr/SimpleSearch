@@ -76,6 +76,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Input.txt" />
+    <Text Include="Output.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
