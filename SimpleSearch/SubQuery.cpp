@@ -92,6 +92,12 @@ void Keyword::handleQuery(int *fileOccurances, int fileOccurancesSize)
 	for (iterator = filePool.begin(); iterator != filePool.end(); ++iterator) {
 		// <XXX: Implemented logic of "AND" here directly, It should be done via different class
 		//	maybe, call a function(templatized by operator) which updates the fileOccurances list>
-		fileOccurances[*iterator] *= rawCounts[*iterator];
+		if (fileOccurances[*iterator]!=0){
+			// <XXX: This if else loop: Time constraints insaan se kya kya nhi karate :/>
+			fileOccurances[*iterator] *= rawCounts[*iterator];
+		}
+		else{
+			fileOccurances[*iterator] = rawCounts[*iterator];
+		}
 	}
 }

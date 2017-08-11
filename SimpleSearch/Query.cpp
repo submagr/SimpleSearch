@@ -59,6 +59,7 @@ void Query::resolveQuery(){
 }
 
 void Query::displayResult(){
+	cout << "Results for Query: {" << _keyword << "} are: " << endl;
 	for (int i = 0; i < _resultSize; i++){
 		if (_result[i]!=0){
 			cout << "\t" << _scope.getFileLocFromIndex(i) << " : " << _result[i] << endl;

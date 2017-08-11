@@ -14,7 +14,7 @@ int BMAlgorithm::getFileSize(string fileName){
 	myfile.seekg(0, ios::end);
 	end = myfile.tellg();
 	myfile.close();
-	cout << "size is: " << (end - begin) << " bytes.\n";
+	// cout << "size is: " << (end - begin) << " bytes.\n";
 	return (int)(end-begin);
 }
 
@@ -38,7 +38,7 @@ int BMAlgorithm::search(string fileName, string pat)
 	// Open File for reading
 	int m = pat.length();
 	int n = getFileSize(fileName);
-	cout << m << " " << n << endl;
+	// cout << m << " " << n << endl;
 	
 	// Get contents of file in a string
 	ifstream infile(fileName);
