@@ -81,6 +81,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BMAlgorithm.h" />
+    <ClInclude Include="Dispatcher.h" />
     <ClInclude Include="Files.h" />
     <ClInclude Include="Query.h" />
     <ClInclude Include="QueryParser.h" />
@@ -91,9 +93,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BMAlgorithm.cpp" />
+    <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="Files.cpp" />
     <ClCompile Include="Query.cpp" />
-    <ClCompile Include="Result.cpp" />
     <ClCompile Include="SimpleSearch.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

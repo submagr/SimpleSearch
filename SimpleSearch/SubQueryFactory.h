@@ -2,6 +2,7 @@
 #define SUBQUERYFACTORY_H
 
 #include "SubQuery.h"
+#include "Files.h"
 using namespace std;
 
 // Factory for creating instances of IAnimal
@@ -13,7 +14,7 @@ class SubQueryFactory
 //	SubQueryFactory &operator=(const SubQueryFactory &) { return *this; }
 public:
 	// static SubQueryFactory * Get();
-	static SubQuery * CreateSubQuery(string rawSubQuery, bool isFirst);
+	static SubQuery * CreateSubQuery(string rawSubQuery, bool isFirst, FileScope scope);
 };
 
 // SubQueryFactory subQueryFactory;

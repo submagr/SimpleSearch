@@ -1,11 +1,20 @@
 #include "Query.h"
 
+Query::Query(FileScope scope, string keyword) :_scope(scope), _keyword(keyword)
+{
+	QueryParser::parse(*this);
+}
+
+Query::~Query(){
+	//<TOOD: Uncomment> 
+	//delete _fileOccurances;
+}
 void Query::setParams(string scope, string keyword){
 	_scope = scope;
 	_keyword = keyword;
 }
 
-string Query::getScope(){
+FileScope Query::getScope(){
 	return _scope;
 }
 
@@ -24,11 +33,42 @@ void Query::displayParsedQuery(){
 	}
 }
 
-Query QueryParser::parse(string scope, string query){
-	Query q;
-	q.setParams(scope, query);
+void Query::resolveQuery(){
+	_resultSize = _scope.getNumberOfFiles();
+	_result = new int[_resultSize]; // <TODO: delete>
+	for (int i = 0; i < _resultSize; i++){
+		_result[i] = 0;
+	}
+
+	for (int i = 0; i < root.size(); i++){
+		int * fileOccurances = new int[_resultSize]; 
+		for (int i = 0; i < _resultSize; i++){
+			fileOccurances[i] = 0;
+		}
+
+		std::list<SubQuery *>::const_iterator iterator;
+		for (iterator = root[i].begin(); iterator != root[i].end(); ++iterator) {
+			(*iterator)->handleQuery(fileOccurances, _resultSize);
+		}
+
+		for (int i = 0; i < _resultSize; i++){
+			_result[i] += fileOccurances[i];
+		}
+		delete[] fileOccurances; // <TODO: will this be executed in every loop ?>
+	}
+}
+
+void Query::displayResult(){
+	cout << "Results for Query: {" << _keyword << "} are: " << endl;
+	for (int i = 0; i < _resultSize; i++){
+		if (_result[i]!=0){
+			cout << "\t" << _scope.getFileLocFromIndex(i) << " : " << _result[i] << endl;
+		}
+	}
+}
+
+void QueryParser::parse(Query &q){
 	CheckPhrase(q);
-	return q;
 }
 
 void QueryParser::CheckPhrase(Query &q)
@@ -45,7 +85,6 @@ vector<string> QueryParser::split(string sentence){
 		back_inserter(arr));
 	return arr;
 }
-
 
 void QueryParser::CreateTree(Query &q)
 {
@@ -69,92 +108,15 @@ void QueryParser::CreateTree(Query &q)
 		}
 		else if (start)
 		{
-			SubQuery * first = SubQueryFactory::CreateSubQuery(arr[i], start);
+			SubQuery * first = SubQueryFactory::CreateSubQuery(arr[i], start, q.getScope());
 			q.root[child].push_back(first);
 			start = false;
 		}
 		else
 		{
-			SubQuery *temp = SubQueryFactory::CreateSubQuery(arr[i], start);
+			SubQuery *temp = SubQueryFactory::CreateSubQuery(arr[i], start, q.getScope());
 			q.root[child].push_back(temp);
 		}
 	}
-}
-
-ProcessQuery::ProcessQuery(listFiles files, Query query) :_files(files), _query(query){
-	for (int i = 0; i<(int)(files._fileLocs.size()); i++){
-		ProcessFile(i);
-	}
-	_results.display();
-}
-
-int ProcessQuery::getFileSize(string fileName){
-	// <REF: http://cplusplus.com/references>
-	streampos begin, end;
-	ifstream myfile(fileName, ios::binary);
-	begin = myfile.tellg();
-	myfile.seekg(0, ios::end);
-	end = myfile.tellg();
-	myfile.close();
-	cout << "size is: " << (end - begin) << " bytes.\n";
-	return (int)(end-begin);
-}
-
-void ProcessQuery::badCharHeuristic(string str, int size, int badchar[NO_OF_CHARS]){
-	int i;
-
-	for (i = 0; i < 256 /*<TODO>*/; i++)
-		badchar[i] = -1;
-
-	for (i = 0; i < size; i++)
-		badchar[(int)str[i]] = i;
-}
-
-// A utility function to get maximum of two integers
-int ProcessQuery::myMax(int a, int b){ 
-	return (a > b) ? a : b; 
-}
-
-Result ProcessQuery::search(string fileName, string pat)
-{
-	// Open File for reading
-	int m = pat.length();
-	int n = getFileSize(fileName);
-	cout << m << " " << n << endl;
-	
-	// Get contents of file in a string
-	ifstream infile;
-	infile.open(fileName);
-	string txt;
-	infile >> txt;
-	// std::transform(data.begin(), data.end(), data.begin(), ::tolower);
-
-	int badchar[256/*<TODO>*/];
-
-	badCharHeuristic(pat, m, badchar);
-
-	int s = 0;
-	Result result(fileName);
-	while (s <= (n - m)){
-		int j = m - 1;
-
-		while (j >= 0 && pat[j] == txt[s + j])
-			j--;
-
-		if (j < 0){
-			result.addMatch(s);
-			s += (s + m < n) ? m - badchar[txt[s + m]] : 1;
-		}else{
-			s += myMax(1, j - badchar[txt[s + j]]);
-		}
-	}
-	infile.close();
-	return result;
-}
-
-void ProcessQuery::ProcessFile(int i){
-	string fileLoc = _files._fileLocs[i];
-	Result result = search(fileLoc, _query.getKeyword());
-	_results.addResult(result);
 }
 

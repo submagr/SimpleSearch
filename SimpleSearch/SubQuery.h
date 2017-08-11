@@ -6,14 +6,18 @@
 #include<list>
 #include<map>
 #include<iostream>
+
+#include "Files.h"
+#include "Dispatcher.h"
 using namespace std;
 
 class SubQuery{
 protected:
 	string _rawSubQuery;
 	bool _isFirst; 
+	FileScope _scope;
 public:
-	SubQuery(string rawSubQuery, bool isFirst);
+	SubQuery(string rawSubQuery, bool isFirst, FileScope scope);
 	virtual void Free() = 0;
 
 	/*	HandleQuery: 
@@ -28,21 +32,21 @@ public:
 class ExactMatch : public SubQuery{
 	string processedString; // The input to the algorithm
 public:
-	ExactMatch(string rawSubQuery, bool isFirst);
+	ExactMatch(string rawSubQuery, bool isFirst, FileScope scope);
 	void Free();
 	void handleQuery(int *fileOccurances, int fileOccurancesSize);
 };
 
 class Stemming: public SubQuery{
 public:
-	Stemming(string rawSubQuery, bool isFirst);
+	Stemming(string rawSubQuery, bool isFirst, FileScope scope);
 	void Free();
 	void handleQuery(int *fileOccurances, int fileOccurancesSize);
 };
 
 class Keyword : public SubQuery{
 public:
-	Keyword(string rawSubQuery, bool isFirst);
+	Keyword(string rawSubQuery, bool isFirst, FileScope scope);
 	void Free();
 	void handleQuery(int *fileOccurances, int fileOccurancesSize);
 };
