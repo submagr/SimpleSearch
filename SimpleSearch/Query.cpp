@@ -13,7 +13,6 @@ string Query::getKeyword(){
 	return _keyword;
 }
 
-
 void Query::displayParsedQuery(){
 	typedef map<int, list<SubQuery *>>::const_iterator MapIterator;
 	for (MapIterator iter = root.begin(); iter != root.end(); iter++)
@@ -70,13 +69,13 @@ void QueryParser::CreateTree(Query &q)
 		}
 		else if (start)
 		{
-			SubQuery * first = subQueryFactory.CreateSubQuery(arr[i], start);
+			SubQuery * first = SubQueryFactory::CreateSubQuery(arr[i], start);
 			q.root[child].push_back(first);
 			start = false;
 		}
 		else
 		{
-			SubQuery *temp = subQueryFactory.CreateSubQuery(arr[i], start);
+			SubQuery *temp = SubQueryFactory::CreateSubQuery(arr[i], start);
 			q.root[child].push_back(temp);
 		}
 	}

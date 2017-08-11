@@ -13,10 +13,10 @@ class SubQueryFactory
 //	SubQueryFactory &operator=(const SubQueryFactory &) { return *this; }
 public:
 	// static SubQueryFactory * Get();
-	SubQuery * CreateSubQuery(string rawSubQuery, bool isFirst);
+	static SubQuery * CreateSubQuery(string rawSubQuery, bool isFirst);
 };
 
-SubQueryFactory subQueryFactory;
+// SubQueryFactory subQueryFactory;
 
 
 // <XXX: Currently declaring a global variable for factory class instance; Elegant way possible>
