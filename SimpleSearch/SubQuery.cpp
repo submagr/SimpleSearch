@@ -1,6 +1,6 @@
 #include "SubQuery.h"
 
-SubQuery::SubQuery(string rawSubQuery, bool isFirst) : _rawSubQuery(rawSubQuery), _isFirst(isFirst)
+SubQuery::SubQuery(string rawSubQuery, bool isFirst, FileScope scope) : _rawSubQuery(rawSubQuery), _isFirst(isFirst), _scope(scope)
 {
 
 }
@@ -9,7 +9,7 @@ void SubQuery::displaySubQuery(){
 	cout << "\t" << _rawSubQuery << "\t" << _isFirst << endl;
 }
 
-ExactMatch::ExactMatch(string rawSubQuery, bool isFirst) : SubQuery(rawSubQuery, isFirst)
+ExactMatch::ExactMatch(string rawSubQuery, bool isFirst, FileScope scope) : SubQuery(rawSubQuery, isFirst, scope)
 {
 	// Preprocess the rawSubQuery
 }
@@ -41,7 +41,7 @@ void ExactMatch::handleQuery(int *fileOccurances, int fileOccurancesSize)
 }
 
 
-Stemming::Stemming(string rawSubQuery, bool isFirst) : SubQuery(rawSubQuery, isFirst)
+Stemming::Stemming(string rawSubQuery, bool isFirst, FileScope scope) : SubQuery(rawSubQuery, isFirst, scope)
 {
 	// Preprocess the rawSubQuery
 }
@@ -68,7 +68,7 @@ void Stemming::handleQuery(int *fileOccurances, int fileOccurancesSize)
 		fileOccurances[*iterator] *= rawCounts[*iterator];
 	}
 }
-Keyword::Keyword(string rawSubQuery, bool isFirst) : SubQuery(rawSubQuery, isFirst)
+Keyword::Keyword(string rawSubQuery, bool isFirst, FileScope scope) : SubQuery(rawSubQuery, isFirst, scope)
 {
 	// Preprocess the rawSubQuery
 }
@@ -86,8 +86,8 @@ void Keyword::handleQuery(int *fileOccurances, int fileOccurancesSize)
 		}
 	}
 	// Dispatch using dispatcher: 
-	map<int, int> rawCounts; 
-	// <TODO: Replace above after implementation of Dispatcher> map<int, int> rawCounts = Dispatcher<BM>::Dispatch(filePool, processedString);
+	map<int, int> rawCounts = Dispatcher::dispatch(filePool, this->_scope, this->_rawSubQuery); 
+
 	list<int>::const_iterator iterator;
 	for (iterator = filePool.begin(); iterator != filePool.end(); ++iterator) {
 		// <XXX: Implemented logic of "AND" here directly, It should be done via different class

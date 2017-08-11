@@ -6,7 +6,6 @@
 # include <map>
 
 # include "Query.h"
-# include "Result.h"
 # include "Files.h"
 
 
@@ -23,11 +22,13 @@ int main(){
 	cout << "Recieved scope: " << scope << endl << "----------------" << endl;
 	cout << "Recieved query: " << endl<< query << endl << "------------------" << endl;
 
-	QueryParser qparser;
-	Query parsedQ = qparser.parse(scope, query); // <TODO: Structure of input is changed, update this>
+	FileScope myScope(scope);
+	Query myQuery(myScope, query);
 	// Display the contents of parsed MAP
-	parsedQ.displayParsedQuery();
-		
+	myQuery.displayParsedQuery();
+
+	myQuery.resolveQuery();
+	myQuery.displayResult();
 	//listFiles files(parsedQ.getScope());
 	//ProcessQuery pq(files, parsedQ);
 	return 0;
