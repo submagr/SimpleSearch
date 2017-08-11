@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BMAlgorithm" Collapsed="true">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAEAAI=</HashCode>
+      <FileName>BMAlgorithm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dispatcher" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Dispatcher.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SubQuery" Collapsed="true">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAIAAAAAAAAAAAAEgAAAAAAAAAAAAAAAAAAAAQAAAI=</HashCode>
+      <FileName>SubQuery.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExactMatch" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAgAAAAAAAAAAQAAAI=</HashCode>
+      <FileName>SubQuery.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stemming" Collapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAI=</HashCode>
+      <FileName>SubQuery.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Keyword" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAAI=</HashCode>
+      <FileName>SubQuery.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SubQueryFactory" Collapsed="true">
+    <Position X="11" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubQueryFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Query" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEAIAAAAAAgQECACAAAgAAAAAAAAAAgACgAAQAAAACA=</HashCode>
+      <FileName>Query.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
