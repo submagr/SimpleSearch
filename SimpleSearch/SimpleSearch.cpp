@@ -28,7 +28,7 @@ int main(){
 	// Display the contents of parsed MAP
 	parsedQ.displayParsedQuery();
 		
-	//listFiles files(parsedQ.getScope());
-	//ProcessQuery pq(files, parsedQ);
+	listFiles files(parsedQ.getScope());
+	ProcessQuery pq(files, parsedQ);
 	return 0;
 }
