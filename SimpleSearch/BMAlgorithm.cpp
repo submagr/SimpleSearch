@@ -6,17 +6,16 @@ void BMAlgorithm::Run(list<int> filePool, FileScope scope, string keyWord, map<i
 	}
 }
 
-int BMAlgorithm::getFileSize(string fileName){
-	// <REF: http://cplusplus.com/references>
-	streampos begin, end;
-	ifstream myfile(fileName, ios::binary);
-	begin = myfile.tellg();
-	myfile.seekg(0, ios::end);
-	end = myfile.tellg();
-	myfile.close();
-	// cout << "size is: " << (end - begin) << " bytes.\n";
-	return (int)(end-begin);
-}
+//int BMAlgorithm::getFileSize(string fileName){
+//	// <REF: http://cplusplus.com/references>
+//	streampos begin, end;
+//	ifstream myfile(fileName, ios::binary);
+//	begin = myfile.tellg();
+//	myfile.seekg(0, ios::end);
+//	end = myfile.tellg();
+//	myfile.close();
+//	return (int)(end-begin);
+//}
 
 void BMAlgorithm::badCharHeuristic(string str, int size, int badchar[NO_OF_CHARS]){
 	int i;
@@ -37,7 +36,6 @@ int BMAlgorithm::search(string fileName, string pat, bool matchLowerCase)
 {
 	// Open File for reading
 	int m = pat.length();
-	int n = getFileSize(fileName);
 	// cout << m << " " << n << endl;
 	
 	// Get contents of file in a string
@@ -50,6 +48,7 @@ int BMAlgorithm::search(string fileName, string pat, bool matchLowerCase)
 
 	txt.assign((std::istreambuf_iterator<char>(infile)),
 		std::istreambuf_iterator<char>());
+	int n = txt.size();
 
 	if (matchLowerCase){
 		std::transform(pat.begin(), pat.end(), pat.begin(), ::tolower);

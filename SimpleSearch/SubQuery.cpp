@@ -11,7 +11,14 @@ void SubQuery::displaySubQuery(){
 
 ExactMatch::ExactMatch(string rawSubQuery, bool isFirst, FileScope scope) : SubQuery(rawSubQuery, isFirst, scope)
 {
-	// Preprocess the rawSubQuery
+	cout << "Query of type ExactMatch: " << rawSubQuery << endl;
+	if (rawSubQuery.size()>=2){
+		_processedString = rawSubQuery.substr(1, rawSubQuery.size() - 2); 
+	}
+	else{
+		// <XXX: Throw exception from here>
+		_processedString = "";
+	}
 }
 
 void ExactMatch::Free(){
@@ -20,9 +27,6 @@ void ExactMatch::Free(){
 
 void ExactMatch::handleQuery(int *fileOccurances, int fileOccurancesSize)
 {
-	// Preprocess the rawSubQUery depending upon the subQueryType		
-	// Define a function in base class that will dispatch the query to individual files 
-	//	and populate the fileOccurance Array.
 	list<int> filePool;
 	for (int i = 0; i < fileOccurancesSize; i++){
 		if (_isFirst || fileOccurances[i]!=0){
@@ -30,13 +34,18 @@ void ExactMatch::handleQuery(int *fileOccurances, int fileOccurancesSize)
 		}
 	}
 	// Dispatch using dispatcher: 
-	map<int, int> rawCounts; 
-	// <TODO: Replace above after implementation of Dispatcher> map<int, int> rawCounts = Dispatcher<BM>::Dispatch(filePool, processedString);
+	map<int, int> rawCounts = Dispatcher::dispatch(filePool, this->_scope, this->_processedString, false); 
+
 	list<int>::const_iterator iterator;
 	for (iterator = filePool.begin(); iterator != filePool.end(); ++iterator) {
 		// <XXX: Implemented logic of "AND" here directly, It should be done via different class
 		//	maybe, call a function(templatized by operator) which updates the fileOccurances list>
-		fileOccurances[*iterator] *= rawCounts[*iterator];
+		if (fileOccurances[*iterator]!=0){
+			fileOccurances[*iterator] *= rawCounts[*iterator];
+		}
+		else{
+			fileOccurances[*iterator] = rawCounts[*iterator];
+		}
 	}
 }
 
