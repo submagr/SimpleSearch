@@ -18,6 +18,12 @@
     <Text Include="ReadMe.txt" />
     <Text Include="Input.txt" />
     <Text Include="Output.txt" />
+    <Text Include="Test\L1_1\L2_0.txt" />
+    <Text Include="Test\L1_0\L1_0.txt" />
+    <Text Include="Test\L1_0\L1_1.txt" />
+    <Text Include="Test\L1_0\L1_D0\L1_D0_0.txt" />
+    <Text Include="Test\L1_0\L1_D1\L1_D1_0.txt" />
+    <Text Include="Test\L0_0.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -27,9 +33,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Query.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Files.h">
@@ -45,9 +48,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BMAlgorithm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -76,5 +76,9 @@
     <ClCompile Include="Dispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

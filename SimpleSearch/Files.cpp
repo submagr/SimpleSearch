@@ -59,18 +59,8 @@ FileScope::FileScope(string scopeLoc):_scopeLoc(scopeLoc){
 void FileScope::listFiles(){
 	// <TODO: Delegate this to another class>				
 	// <XXX: For now, returning a dummy location>
-
-	 // string dir = string("C:\\Users\\bbansal\\Documents\\CBLectures");
 	 string dir = _scopeLoc;
-	 //_fileLocs = vector<string>();
-
 	 getdir(dir, _fileLocs);
-	 cout << _fileLocs.size() << endl;
-	 for (unsigned int i = 0; i < _fileLocs.size(); i++) {
-		 // cout << _fileLocs[i] << endl;
-	 }
-	//string mystring("Test/test.txt");
-	// _fileLocs.push_back(mystring);
 }
 
 void FileScope::createFileLocsHash(){

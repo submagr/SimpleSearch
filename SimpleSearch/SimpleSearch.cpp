@@ -16,20 +16,25 @@ int main(){
 	string scope;
 	cin >> scope;
 	cin.ignore();
-	string query;
-	getline(cin, query);
-
-	cout << "Recieved scope: " << scope << endl << "----------------" << endl;
-	cout << "Recieved query: " << endl<< query << endl << "------------------" << endl;
-
+	cout << "Recieved scope: " << scope << endl;
 	FileScope myScope(scope);
-	Query myQuery(myScope, query);
-	// Display the contents of parsed MAP
-	myQuery.displayParsedQuery();
 
-	myQuery.resolveQuery();
-	myQuery.displayResult();
-	//listFiles files(parsedQ.getScope());
-	//ProcessQuery pq(files, parsedQ);
+	int numQueries;
+	cin >> numQueries;
+	cin.ignore();
+	cout << "Recieved num of queries = " << numQueries << endl << "----------" << endl;
+
+
+	for (int i = 0; i < numQueries; i++){
+		string query;
+		getline(cin, query);
+		cout << i+1 << ". Recieved query: " << endl << query << endl;
+
+		Query myQuery(myScope, query);
+
+		myQuery.resolveQuery();
+		myQuery.displayResult();
+		cout << "-------------" << endl;
+	}
 	return 0;
 }

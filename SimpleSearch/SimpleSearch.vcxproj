@@ -79,14 +79,18 @@
     <Text Include="Input.txt" />
     <Text Include="Output.txt" />
     <Text Include="ReadMe.txt" />
+    <Text Include="Test\L1_0\L1_0.txt" />
+    <Text Include="Test\L1_0\L1_1.txt" />
+    <Text Include="Test\L1_0\L1_D0\L1_D0_0.txt" />
+    <Text Include="Test\L1_0\L1_D1\L1_D1_0.txt" />
+    <Text Include="Test\L1_1\L2_0.txt" />
+    <Text Include="Test\L0_0.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BMAlgorithm.h" />
     <ClInclude Include="Dispatcher.h" />
     <ClInclude Include="Files.h" />
     <ClInclude Include="Query.h" />
-    <ClInclude Include="QueryParser.h" />
-    <ClInclude Include="Result.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SubQuery.h" />
     <ClInclude Include="SubQueryFactory.h" />
@@ -104,6 +108,10 @@
     </ClCompile>
     <ClCompile Include="SubQuery.cpp" />
     <ClCompile Include="SubQueryFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
