@@ -5,14 +5,16 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include "Trie.h"
 
 using namespace std;
 
 class Dictionary{
 
 public:
-    Dictionary();
- 
+	
+	Dictionary();
+
 };
 
 #endif

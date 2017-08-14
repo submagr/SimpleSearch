@@ -1,9 +1,10 @@
  #include "Dictionary.h"
  #include "common.h"
 
+Trie dictionaryTrie;
  Dictionary::Dictionary()
 {
-    Trie dictionaryTrie;
+    
     std::vector< string > words;
     string line;
     ifstream myfile ("words.txt");
