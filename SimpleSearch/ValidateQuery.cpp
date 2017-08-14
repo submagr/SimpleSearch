@@ -4,7 +4,7 @@
 {
     std::vector< string > words;
     string line;
-    ifstream myfile ("/Users/salgoyal/Desktop/words.txt");
+    ifstream myfile ("words.txt");
     if (myfile.is_open())
     {
         while ( getline (myfile,line) )
