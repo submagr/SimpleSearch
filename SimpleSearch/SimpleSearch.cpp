@@ -29,9 +29,8 @@ int main(){
 		string query;
 		getline(cin, query);
 		cout << i+1 << ". Recieved query: " << endl << query << endl;
-
 		Query myQuery(myScope, query);
-
+		myQuery.displayParsedQuery();
 		myQuery.resolveQuery();
 		myQuery.displayResult();
 		cout << "-------------" << endl;

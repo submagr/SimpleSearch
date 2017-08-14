@@ -30,7 +30,7 @@ public:
 };
 
 class ExactMatch : public SubQuery{
-	string processedString; // The input to the algorithm
+	string _processedString; // The input to the algorithm
 public:
 	ExactMatch(string rawSubQuery, bool isFirst, FileScope scope);
 	void Free();
