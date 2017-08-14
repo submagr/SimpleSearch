@@ -1,11 +1,20 @@
 #include "Query.h"
 
+Query::Query(FileScope scope, string keyword) :_scope(scope), _keyword(keyword)
+{
+	QueryParser::parse(*this);
+}
+
+Query::~Query(){
+	//<TOOD: Uncomment> 
+	//delete _fileOccurances;
+}
 void Query::setParams(string scope, string keyword){
 	_scope = scope;
 	_keyword = keyword;
 }
 
-string Query::getScope(){
+FileScope Query::getScope(){
 	return _scope;
 }
 
@@ -13,98 +22,101 @@ string Query::getKeyword(){
 	return _keyword;
 }
 
-Query QueryParser::parse(int argc, char *argv[]){
-	if (argc != 3) {
-		cout << "Usage: " << argv[0] << " <scope>" << " search keyword" << endl;
-		throw;
-	} else {
-		Query q;
-		q.setParams(argv[1], argv[2]);
-		return q;
-		//ifstream the_file(argv[1]);
-		//if (!the_file.is_open())
-		//	cout << "Could not open file\n";
-		//else {
-		//	char x;
-		//	while (the_file.get(x))
-		//		cout << x;
-		//}
+void Query::displayParsedQuery(){
+	typedef map<int, list<SubQuery *>>::const_iterator MapIterator;
+	for (MapIterator iter = root.begin(); iter != root.end(); iter++)
+	{
+		cout << "Key: " << iter->first << endl << "Values:" << endl;
+		list<SubQuery *> columnList = (iter->second);
+		for (list<SubQuery *>::iterator i = columnList.begin(); i != columnList.end(); ++i)
+			(*i)->displaySubQuery();
 	}
 }
 
-ProcessQuery::ProcessQuery(listFiles files, Query query) :_files(files), _query(query){
-	for (int i = 0; i<files._fileLocs.size(); i++){
-		ProcessFile(i);
+void Query::resolveQuery(){
+	_resultSize = _scope.getNumberOfFiles();
+	_result = new int[_resultSize]; // <TODO: delete>
+	for (int i = 0; i < _resultSize; i++){
+		_result[i] = 0;
 	}
-	_results.display();
+
+	for (int i = 0; i < root.size(); i++){
+		int * fileOccurances = new int[_resultSize]; 
+		for (int i = 0; i < _resultSize; i++){
+			fileOccurances[i] = 0;
+		}
+
+		std::list<SubQuery *>::const_iterator iterator;
+		for (iterator = root[i].begin(); iterator != root[i].end(); ++iterator) {
+			(*iterator)->handleQuery(fileOccurances, _resultSize);
+		}
+
+		for (int i = 0; i < _resultSize; i++){
+			_result[i] += fileOccurances[i];
+		}
+		delete[] fileOccurances; // <TODO: will this be executed in every loop ?>
+	}
 }
 
-int ProcessQuery::getFileSize(string fileName){
-	// <REF: http://cplusplus.com/references>
-	streampos begin, end;
-	ifstream myfile(fileName, ios::binary);
-	begin = myfile.tellg();
-	myfile.seekg(0, ios::end);
-	end = myfile.tellg();
-	myfile.close();
-	cout << "size is: " << (end - begin) << " bytes.\n";
-	return (int)(end-begin);
-}
-
-void ProcessQuery::badCharHeuristic(string str, int size, int badchar[NO_OF_CHARS]){
-	int i;
-
-	for (i = 0; i < NO_OF_CHARS; i++)
-		badchar[i] = -1;
-
-	for (i = 0; i < size; i++)
-		badchar[(int)str[i]] = i;
-}
-
-// A utility function to get maximum of two integers
-int ProcessQuery::max(int a, int b) { 
-	return (a > b) ? a : b; 
-}
-
-Result ProcessQuery::search(string fileName, string pat)
-{
-	// Open File for reading
-	int m = pat.length();
-	int n = getFileSize(fileName);
-	cout << m << " " << n << endl;
-	
-	// Get contents of file in a string
-	ifstream infile;
-	infile.open(fileName);
-	string txt;
-	infile >> txt;
-	// std::transform(data.begin(), data.end(), data.begin(), ::tolower);
-
-	int badchar[NO_OF_CHARS];
-
-	badCharHeuristic(pat, m, badchar);
-
-	int s = 0;
-	Result result(fileName);
-	while (s <= (n - m)){
-		int j = m - 1;
-
-		while (j >= 0 && pat[j] == txt[s + j])
-			j--;
-
-		if (j < 0){
-			result.addMatch(s);
-			s += (s + m < n) ? m - badchar[txt[s + m]] : 1;
-		}else{
-			s += max(1, j - badchar[txt[s + j]]);
+void Query::displayResult(){
+	cout << "Results for Query: {" << _keyword << "} are: " << endl;
+	for (int i = 0; i < _resultSize; i++){
+		if (_result[i]!=0){
+			cout << "\t" << _scope.getFileLocFromIndex(i) << " : " << _result[i] << endl;
 		}
 	}
-	infile.close();
-	return result;
 }
 
-void ProcessQuery::ProcessFile(int i){
-	string fileLoc = _files._fileLocs[i];
-	Result result = search(fileLoc, _query.getKeyword());
-	_results.addResult(result);
+void QueryParser::parse(Query &q){
+	CheckPhrase(q);
 }
+
+void QueryParser::CheckPhrase(Query &q)
+{
+	string input = q.getKeyword();
+	CreateTree(q);
+}
+
+vector<string> QueryParser::split(string sentence){
+	istringstream iss(sentence);
+	vector<string> arr;
+	copy(istream_iterator<string>(iss),
+		istream_iterator<string>(),
+		back_inserter(arr));
+	return arr;
+}
+
+void QueryParser::CreateTree(Query &q)
+{
+	string input = q.getKeyword();
+	vector<string> arr;
+	arr = split(input); 
+	// <XXX: There is an issue with the algorithm of split (Hint: What happens when subquery of type exact match contains spaces ?)>
+	bool start = true; // Represents that map[child] is not created yet
+	int child = 0; // Denotes the OR branch (column)
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		if (arr[i].compare("AND") == 0)
+		{
+			continue;
+		}
+		else if (arr[i].compare("OR") == 0) // <XXX: what happens if first word was OR>
+		{
+			start = true;
+			child++;
+			continue;
+		}
+		else if (start)
+		{
+			SubQuery * first = SubQueryFactory::CreateSubQuery(arr[i], start, q.getScope());
+			q.root[child].push_back(first);
+			start = false;
+		}
+		else
+		{
+			SubQuery *temp = SubQueryFactory::CreateSubQuery(arr[i], start, q.getScope());
+			q.root[child].push_back(temp);
+		}
+	}
+}
+
