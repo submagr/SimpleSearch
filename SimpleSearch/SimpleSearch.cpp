@@ -14,6 +14,7 @@ using namespace std;
 
 
 int main(){
+	cout << "Loading Dictionary" << endl;
 	Dictionary();
 	string scope;
 	cin >> scope;
