@@ -17,4 +17,5 @@ Note: Procedure for working on todo's:
 |[X]|Accept multiple queries for same scope|High|Very Simple| Shubham |
 |[]|BM Algo:: RUN function breaks SRP|Medium| Need effort||
 |[]|BM Algo:: code implementation read entire file in a string|Medium|Difficult||
-|[]| Lowercase Search |High|Simple ||
+|[]| Lowercase Search |High|Simple |Shubham|
+|[]| Handle issue #2 (Query parsing, space inside exact match subquery)|High| Simple ||
