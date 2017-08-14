@@ -40,11 +40,16 @@ void ExactMatch::handleQuery(int *fileOccurances, int fileOccurancesSize)
 	}
 }
 
+void ExactMatch::Validate()
+{
+	ValidateQuery::ValidateQuery(_rawSubQuery);
+}
 
 Stemming::Stemming(string rawSubQuery, bool isFirst, FileScope scope) : SubQuery(rawSubQuery, isFirst, scope)
 {
 	// Preprocess the rawSubQuery
 }
+
 
 void Stemming::Free(){
 	delete this;
@@ -99,4 +104,9 @@ void Keyword::handleQuery(int *fileOccurances, int fileOccurancesSize)
 			fileOccurances[*iterator] = rawCounts[*iterator];
 		}
 	}
+}
+
+void Keyword::Validate()
+{
+	ValidateQuery::ValidateQuery(_rawSubQuery);
 }
