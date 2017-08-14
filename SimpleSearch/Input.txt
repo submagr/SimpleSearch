@@ -1,6 +1,8 @@
 Test/
-4
+6
 apple
 boss
 apple AND ooty OR boss
 apple AND ooty OR boss OR apply AND ooty AND cool
+ApplE
+Ooty

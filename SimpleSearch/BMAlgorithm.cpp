@@ -1,8 +1,8 @@
 #include "BMAlgorithm.h"
 
-void BMAlgorithm::Run(list<int> filePool, FileScope scope, string keyWord, map<int, int>& counts){
+void BMAlgorithm::Run(list<int> filePool, FileScope scope, string keyWord, map<int, int>& counts, bool matchLowerCase){
 	for (list<int>::iterator i = filePool.begin(); i != filePool.end(); ++i){
-		counts[*i] = search(scope.getFileLocFromIndex(*i), keyWord);
+		counts[*i] = search(scope.getFileLocFromIndex(*i), keyWord, matchLowerCase);
 	}
 }
 
@@ -33,7 +33,7 @@ int BMAlgorithm::myMax(int a, int b){
 	return (a > b) ? a : b; 
 }
 
-int BMAlgorithm::search(string fileName, string pat)
+int BMAlgorithm::search(string fileName, string pat, bool matchLowerCase)
 {
 	// Open File for reading
 	int m = pat.length();
@@ -51,7 +51,10 @@ int BMAlgorithm::search(string fileName, string pat)
 	txt.assign((std::istreambuf_iterator<char>(infile)),
 		std::istreambuf_iterator<char>());
 
-	// std::transform(data.begin(), data.end(), data.begin(), ::tolower);
+	if (matchLowerCase){
+		std::transform(pat.begin(), pat.end(), pat.begin(), ::tolower);
+		std::transform(txt.begin(), txt.end(), txt.begin(), ::tolower);
+	}
 
 	int badchar[256/*<TODO>*/];
 

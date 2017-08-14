@@ -86,7 +86,7 @@ void Keyword::handleQuery(int *fileOccurances, int fileOccurancesSize)
 		}
 	}
 	// Dispatch using dispatcher: 
-	map<int, int> rawCounts = Dispatcher::dispatch(filePool, this->_scope, this->_rawSubQuery); 
+	map<int, int> rawCounts = Dispatcher::dispatch(filePool, this->_scope, this->_rawSubQuery, true); 
 
 	list<int>::const_iterator iterator;
 	for (iterator = filePool.begin(); iterator != filePool.end(); ++iterator) {

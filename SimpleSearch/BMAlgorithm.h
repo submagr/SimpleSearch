@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <streambuf>
+#include <algorithm>
 
 #include "Files.h"
 using namespace std;
@@ -14,11 +15,11 @@ using namespace std;
 // <TODO: All methods should have been static>
 class BMAlgorithm{
 public:		
-	static void Run(list<int> filePool, FileScope scope, string keyword, map<int, int>& counts);
+	static void Run(list<int> filePool, FileScope scope, string keyword, map<int, int>& counts, bool matchLowerCase);
 	static int myMax(int a, int b);
 	static int getFileSize(string fileName);
 	static void badCharHeuristic(string str, int size, int badchar[256/*TODO:NO_OF_CHARS*/]);
-	static int search(string fileName, string keyWord);
+	static int search(string fileName, string keyWord, bool matchLowerCase);
 };
 
 #endif
