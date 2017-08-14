@@ -35,7 +35,7 @@ public:
 	ExactMatch(string rawSubQuery, bool isFirst, FileScope scope);
 	void Free();
 	void handleQuery(int *fileOccurances, int fileOccurancesSize);
-	void ValidateQuery();
+	void Validate();
 };
 
 class Stemming: public SubQuery{
@@ -50,7 +50,7 @@ public:
 	Keyword(string rawSubQuery, bool isFirst, FileScope scope);
 	void Free();
 	void handleQuery(int *fileOccurances, int fileOccurancesSize);
-	void ValidateQuery();
+	void Validate();
 };
 
 
