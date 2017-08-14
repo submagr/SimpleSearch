@@ -7,12 +7,14 @@
 
 # include "Query.h"
 # include "Files.h"
+# include "Dictionary.h"
 
 
 using namespace std;
 
 
 int main(){
+	Dictionary();
 	string scope;
 	cin >> scope;
 	cin.ignore();
