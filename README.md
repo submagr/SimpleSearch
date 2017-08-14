@@ -8,7 +8,7 @@ Note: Procedure for working on todo's:
 
 | Status | Work | Priority | Difficulty| Who is Currently Working? |
 | --- | --- | --- | --- | ---- |
-|[]|Exact Match|High|Simple||
+|[]|Exact Match|High|Simple|Shubham|
 |[]|Stemming|High|Need Effort||
 |[]| Testing(Testing means, running code on different scenarios and directory types)|High|Simple||
 |[]|Incompatible Query. Eg: apple AND ooty OR |Medium|Simple||
@@ -17,5 +17,5 @@ Note: Procedure for working on todo's:
 |[X]|Accept multiple queries for same scope|High|Very Simple| Shubham |
 |[]|BM Algo:: RUN function breaks SRP|Medium| Need effort||
 |[]|BM Algo:: code implementation read entire file in a string|Medium|Difficult||
-|[]| Lowercase Search |High|Simple |Shubham|
+|[X]| Lowercase Search |High|Simple |Shubham|
 |[]| Handle issue #2 (Query parsing, space inside exact match subquery)|High| Simple ||
