@@ -11,3 +11,9 @@ Possible Extensions:
 Suggested reading:
  * http://www.geeksforgeeks.org/data-structure-dictionary-spell-checker/
   
+Meeting with Gagan:
+ 1. fopen error
+ 2. query validate
+ 3. horizontal and vertical collation
+ 4. trie as class
+ 5. take care of scope --  by copy, by ref or by shared ref

@@ -18,4 +18,8 @@ Note: Procedure for working on todo's:
 |[]|BM Algo:: RUN function breaks SRP|Medium| Need effort||
 |[]|BM Algo:: code implementation read entire file in a string|Medium|Difficult||
 |[X]| Lowercase Search |High|Simple |Shubham|
+<<<<<<< HEAD
 |[]| Handle issue #2 (Query parsing, space inside exact match subquery)|High| Simple ||Bhavyaa
+=======
+|[]| Handle issue #2 (Query parsing, space inside exact match subquery)|High| Simple ||Bhavyaa
+>>>>>>> d80ab49f651859b957508269aafa8c42bc60e068
