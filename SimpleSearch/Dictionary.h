@@ -1,19 +1,20 @@
-#ifndef VALIDATEQUERY_H
-#define VALIDATEQUERY_H
+#ifndef DICTIONARY_H
+#define DICTIONARY_H
 
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
-
+#include "Trie.h"
 
 using namespace std;
 
-class ValidateQuery{
+class Dictionary{
 
 public:
-    ValidateQuery(string query);
- 
+	
+	Dictionary();
+
 };
 
 #endif

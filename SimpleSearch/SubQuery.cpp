@@ -1,4 +1,5 @@
 #include "SubQuery.h"
+#include "ValidateQuery.h"
 
 SubQuery::SubQuery(string rawSubQuery, bool isFirst, FileScope scope) : _rawSubQuery(rawSubQuery), _isFirst(isFirst), _scope(scope)
 {
@@ -85,6 +86,7 @@ void Stemming::handleQuery(int *fileOccurances, int fileOccurancesSize)
 Keyword::Keyword(string rawSubQuery, bool isFirst, FileScope scope) : SubQuery(rawSubQuery, isFirst, scope)
 {
 	// Preprocess the rawSubQuery
+	this->Validate();
 }
 
 void Keyword::Free(){

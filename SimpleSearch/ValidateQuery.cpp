@@ -1,25 +1,15 @@
  #include "ValidateQuery.h"
+#include "common.h"
+#include <string>
+#include<algorithm>
 
- void static ValidateQuery::CreateDictionary()
-{
-    std::vector< string > words;
-    string line;
-    ifstream myfile ("words.txt");
-    if (myfile.is_open())
-    {
-        while ( getline (myfile,line) )
-        {
-            words.push_back(line);
-        }
-        myfile.close();
-        trie.build_trie(words);
-    }
-    else cout << "Unable to open file";     
-}
 
 ValidateQuery::ValidateQuery(string query){
-    CreateDictionary();
+	std::transform(query.begin(),
+		query.end(),
+		query.begin(),
+		::tolower);
     bool in_trie = false;
-    trie.search(query, in_trie);
-    cout << query << in_trie << endl;
+    dictionaryTrie.search(query, in_trie);
+    // cout << query << in_trie << endl;
 }
