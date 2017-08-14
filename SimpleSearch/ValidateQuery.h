@@ -9,8 +9,6 @@
 using namespace std;
 
 class ValidateQuery{
-    Trie trie;
-    void static CreateDictionary();
 
 public:
     ValidateQuery(string query);
